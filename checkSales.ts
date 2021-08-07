@@ -25,15 +25,15 @@ const buildMessage = (sale: any) => (
 	.setColor('#0099ff')
 	.setTitle(sale.asset.name + ' sold!')
 	.setURL(sale.asset.permalink)
-	.setAuthor('OpenSea Bot', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png', 'https://github.com/sbauch/opensea-discord-bot')
-	.setThumbnail(sale.asset.collection.image_url)
+	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://github.com/sbauch/opensea-discord-bot')
+	.setThumbnail(sale.asset.image_url)
 	.addFields(
-		{ name: 'Name', value: sale.asset.name },
+		//{ name: 'Name', value: sale.asset.name },
 		{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`},
-		{ name: 'Buyer', value: sale?.winner_account?.address, },
-		{ name: 'Seller', value: sale?.seller?.address,  },
+		{ name: 'Buyer', value: sale?.winner_account?.user?.username, },
+		{ name: 'Seller', value: sale?.seller?.user?.username,  },
 	)
-  .setImage(sale.asset.image_url)
+  	//.setImage(sale.asset.image_url)
 	.setTimestamp(Date.parse(`${sale?.created_date}Z`))
 	.setFooter('Sold on OpenSea', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png')
 )
