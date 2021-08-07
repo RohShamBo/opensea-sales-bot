@@ -20,7 +20,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
   })
 }
 
-const buildMessage = (sale: any) => (
+const buildMessage = (sale: any, buyer_name, seller_name) => (
   new Discord.MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle(sale.asset.name + ' sold for ' + `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`)
@@ -30,8 +30,10 @@ const buildMessage = (sale: any) => (
 	.addFields(
 		//{ name: 'Name', value: sale.asset.name },
 		//{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`},
-		{ name: 'Buyer', value: sale?.winner_account?.user?.username, },
-		{ name: 'Seller', value: sale?.seller?.user?.username,  },
+		//{ name: 'Buyer', value: sale?.winner_account?.user?.username, },
+		//{ name: 'Seller', value: sale?.seller?.user?.username,  },
+		{ name: 'Buyer', value: buyer_name, },
+		{ name: 'Seller', value: seller_name,  },
 	)
   	//.setImage(sale.asset.image_url)
 	.setTimestamp(Date.parse(`${sale?.created_date}Z`))
@@ -56,7 +58,9 @@ async function main() {
 
   await Promise.all(
     openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
-      const message = buildMessage(sale);
+      const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
+      const seller_name = sale?.seller?.user != null ? sale?.seller?.user?.username : sale?.seller?.address;
+      const message = buildMessage(sale, buyer_name, seller_name);
       return channel.send(message)
     })
   );   
