@@ -23,13 +23,13 @@ const  discordSetup = async (): Promise<TextChannel> => {
 const buildMessage = (sale: any) => (
   new Discord.MessageEmbed()
 	.setColor('#0099ff')
-	.setTitle(sale.asset.name + ' sold!')
+	.setTitle(sale.asset.name + ' sold for ' + `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`)
 	.setURL(sale.asset.permalink)
 	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://github.com/sbauch/opensea-discord-bot')
 	.setThumbnail(sale.asset.image_url)
 	.addFields(
 		//{ name: 'Name', value: sale.asset.name },
-		{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`},
+		//{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`},
 		{ name: 'Buyer', value: sale?.winner_account?.user?.username, },
 		{ name: 'Seller', value: sale?.seller?.user?.username,  },
 	)
