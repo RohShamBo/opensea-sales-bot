@@ -25,7 +25,7 @@ const buildMessage = (sale: any) => (
 	.setColor('#0099ff')
 	.setTitle(sale.asset.name + ' sold for ' + `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`)
 	.setURL(sale.asset.permalink)
-	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://github.com/sbauch/opensea-discord-bot')
+	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://opensea.io/activity/' + process.env.COLLECTION_SLUG!)
 	.setThumbnail(sale.asset.image_url)
 	.addFields(
 		//{ name: 'Name', value: sale.asset.name },
