@@ -51,27 +51,27 @@ async function main() {
   { 
     console.log(collection_slugs[i]); 
     console.log(collection_adds[i]); 
-  }
-                                             
-  const openSeaResponse = await fetch(
-    "https://api.opensea.io/api/v1/events?" + new URLSearchParams({
-      offset: '0',
-      limit: '100',
-      event_type: 'successful',
-      only_opensea: 'false',
-      occurred_after: hoursAgo.toString(), 
-      collection_slug: process.env.COLLECTION_SLUG!,
-      contract_address: process.env.CONTRACT_ADDRESS!
-  })).then((resp) => resp.json());
+                          
+  	const openSeaResponse = await fetch(
+    		"https://api.opensea.io/api/v1/events?" + new URLSearchParams({
+     		 offset: '0',
+      		limit: '100',
+      		event_type: 'successful',
+      		only_opensea: 'false',
+      		occurred_after: hoursAgo.toString(), 
+      		collection_slug: collection_slugs[i],
+      		contract_address: collection_adds[i]!
+  	})).then((resp) => resp.json());
 
-  await Promise.all(
-    openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
-      const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
-      const seller_name = sale?.seller?.user?.username != null ? sale?.seller?.user?.username : sale?.seller?.address;
-      const message = buildMessage(sale, buyer_name, seller_name);
-      return channel.send(message)
-    })
-  );   
+  	await Promise.all(
+    		openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
+      			const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
+      			const seller_name = sale?.seller?.user?.username != null ? sale?.seller?.user?.username : sale?.seller?.address;
+      			const message = buildMessage(sale, buyer_name, seller_name);
+      			return channel.send(message)
+    		})
+  	); 
+  }
 }
 
 main()
