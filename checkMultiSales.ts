@@ -71,7 +71,7 @@ async function main() {
       			return channel.send(message)
     		})
   	); 
-    }
+    } else console.log("no entry")
   }
 }
 
