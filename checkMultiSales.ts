@@ -52,7 +52,7 @@ async function main() {
   { 
     console.log(collection_slugs[i]); 
     console.log(collection_adds[i]); 
-    //if(collection_slugs[i] != null) {                    
+    if(collection_slugs[i] != null) {                    
   	const openSeaResponse = await fetch(
     		"https://api.opensea.io/api/v1/events?" + new URLSearchParams({
      		 offset: '0',
@@ -72,9 +72,9 @@ async function main() {
       			return channel.send(message)
     		})
   	); 
-    //} else {
-	//console.log("no entry")
-    //}
+    } else {
+	console.log("no entry")
+    }
   }
 }
 
