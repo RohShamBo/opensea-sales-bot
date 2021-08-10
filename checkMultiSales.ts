@@ -52,7 +52,7 @@ async function main() {
   { 
     console.log(collection_slugs[i]); 
     console.log(collection_adds[i]); 
-    if(collection_slugs[i] != null) {                    
+    if(collection_slugs[i] != '') {                    
   	const openSeaResponse = await fetch(
     		"https://api.opensea.io/api/v1/events?" + new URLSearchParams({
      		 offset: '0',
