@@ -25,6 +25,24 @@
     "SECONDS": {
       "description": "How many seconds should we look back for sales on OpenSea. i.e. 3600 for one hour. Running more frequently may get you banned from the OpenSea API",
       "required": false
+    },
+    "MULTI_CONTRACT_ADDRESS_1": {
+      "description": "The address of your token contract"
+    },
+    "MULTI_COLLECTION_SLUG_1": {
+      "description": "The OpenSea slug for your collection"
+    },
+    "MULTI_CONTRACT_ADDRESS_2": {
+      "description": "The address of your token contract"
+    },
+    "MULTI_COLLECTION_SLUG_2": {
+      "description": "The OpenSea slug for your collection"
+    },
+  "MULTI_CONTRACT_ADDRESS_3": {
+      "description": "The address of your token contract"
+    },
+    "MULTI_COLLECTION_SLUG_3": {
+      "description": "The OpenSea slug for your collection"
     }
   },
   "image": "heroku/nodejs",
