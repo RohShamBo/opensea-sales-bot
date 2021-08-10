@@ -44,8 +44,8 @@ async function main() {
   const channel = await discordSetup();
   const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
-  const collection_slugs = ['avid-lines', 'pulsquares']
-  const collection_adds = ['0xdfacd840f462c27b0127fc76b63e7925bed0f9d5','0x905b180268f2773022e1a10e204b0858b2e60dcf']
+  const collection_slugs = ['avid-lines', 'pulsquares','framergence']
+  const collection_adds = ['0xdfacd840f462c27b0127fc76b63e7925bed0f9d5','0x905b180268f2773022e1a10e204b0858b2e60dcf','0xbc17cd7f1a58bda5d6181618090813b3050416b5']
   
   for(var i = 0; i < collection_slugs.length; i++)
   { 
