@@ -20,12 +20,12 @@ const  discordSetup = async (): Promise<TextChannel> => {
   })
 }
 
-const buildMessage = (sale: any, buyer_name, seller_name) => (
+const buildMessage = (sale: any, buyer_name, seller_name, slug) => (
   new Discord.MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle(sale.asset.name + ' sold for ' + `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`)
 	.setURL(sale.asset.permalink)
-	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://opensea.io/activity/' + process.env.COLLECTION_SLUG!)
+	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://opensea.io/activity/' + slug)
 	.setThumbnail(sale.asset.image_url)
 	.addFields(
 		//{ name: 'Name', value: sale.asset.name },
@@ -68,7 +68,7 @@ async function main() {
     		openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
       			const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
       			const seller_name = sale?.seller?.user?.username != null ? sale?.seller?.user?.username : sale?.seller?.address;
-      			const message = buildMessage(sale, buyer_name, seller_name);
+      			const message = buildMessage(sale, buyer_name, seller_name, collection_slugs[i]);
       			return channel.send(message)
     		})
   	); 
