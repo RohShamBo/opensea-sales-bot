@@ -14,7 +14,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
     console.log("Login to Discord Bot")
     discordBot.login(process.env.DISCORD_BOT_TOKEN).then().catch(reason => {
 	console.log("Login failed: " + reason);
-    	console.log("Token used: " + botToken);
+    	console.log("Token used: " + process.env.DISCORD_BOT_TOKEN);
     });    
     discordBot.on('ready', async () => {
       console.log("Fetch channel")
