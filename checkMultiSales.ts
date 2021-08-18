@@ -42,8 +42,9 @@ const buildMessage = (sale: any, buyer_name, seller_name, slug) => (
 )
 
 async function main() {
-  const channel = await discordSetup();
   console.log("Discord Setup")
+  const channel = await discordSetup();
+  console.log("Discord Setup Complete")
   const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
   const collection_slugs = [process.env.MULTI_CONTRACT_SLUG_1!, process.env.MULTI_CONTRACT_SLUG_2!,process.env.MULTI_CONTRACT_SLUG_3!]
