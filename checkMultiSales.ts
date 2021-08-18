@@ -11,7 +11,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
     ['DISCORD_BOT_TOKEN', 'DISCORD_CHANNEL_ID'].forEach((envVar) => {
       if (!process.env[envVar]) reject(`${envVar} not set`)
     })
-  
+    console.log("Login to Discord Bot")
     discordBot.login(process.env.DISCORD_BOT_TOKEN);
     discordBot.on('ready', async () => {
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
@@ -43,6 +43,7 @@ const buildMessage = (sale: any, buyer_name, seller_name, slug) => (
 
 async function main() {
   const channel = await discordSetup();
+  console.log("Discord Setup")
   const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
   const collection_slugs = [process.env.MULTI_CONTRACT_SLUG_1!, process.env.MULTI_CONTRACT_SLUG_2!,process.env.MULTI_CONTRACT_SLUG_3!]
