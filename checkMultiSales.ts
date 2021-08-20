@@ -6,11 +6,6 @@ import { parseISO } from 'date-fns'
 
 
 const discordBot = new Discord.Client();
-console.log("Login")
-discordBot.login(process.env.DISCORD_BOT_TOKEN!);
-console.log("Destroy")
-discordBot.destroy();
-console.log("Destroyed")
 
 const  discordSetup = async (): Promise<TextChannel> => {
   return new Promise<TextChannel>((resolve, reject) => {
@@ -18,7 +13,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
       if (!process.env[envVar]) reject(`${envVar} not set`)
     })
     console.log("Login to Discord Bot")
-    	discordBot.login(process.env.DISCORD_BOT_TOKEN!).then().catch(reason => {
+    	discordBot.login(process.env.DISCORD_BOT_TOKEN!).then(console.log("Logged in").catch(reason => {
 		console.log("Login failed: " + reason);
     		console.log("Token used: " + process.env.DISCORD_BOT_TOKEN!);
     	});
