@@ -12,10 +12,12 @@ const  discordSetup = async (): Promise<TextChannel> => {
       if (!process.env[envVar]) reject(`${envVar} not set`)
     })
     console.log("Login to Discord Bot")
-    discordBot.login(process.env.DISCORD_BOT_TOKEN!).then().catch(reason => {
-	console.log("Login failed: " + reason);
-    	console.log("Token used: " + process.env.DISCORD_BOT_TOKEN!);
-    });    
+    discordBot.destroy().then(() => {
+    	discordBot.login(process.env.DISCORD_BOT_TOKEN!).then().catch(reason => {
+		console.log("Login failed: " + reason);
+    		console.log("Token used: " + process.env.DISCORD_BOT_TOKEN!);
+    	});    
+    });
     discordBot.on('ready', async () => {
       console.log("Fetch channel")
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
