@@ -13,7 +13,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
       if (!process.env[envVar]) reject(`${envVar} not set`)
     })
     console.log("Login to Discord Bot")
-    	discordBot.login(process.env.DISCORD_BOT_TOKEN!).then(console.log("Logged in")).catch(reason => {
+    	discordBot.login(process.env.DISCORD_BOT_TOKEN!).then().catch(reason => {
 		console.log("Login failed: " + reason);
     		console.log("Token used: " + process.env.DISCORD_BOT_TOKEN!);
     	});
