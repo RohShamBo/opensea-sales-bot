@@ -7,8 +7,8 @@ import { parseISO } from 'date-fns'
 
 const discordBot = new Discord.Client();
 console.log("Login")
-discordBot.login(process.env.DISCORD_BOT_TOKEN!)
-console.log("Destroy"):
+discordBot.login(process.env.DISCORD_BOT_TOKEN!);
+console.log("Destroy")
 discordBot.destroy();
 console.log("Destroyed")
 
