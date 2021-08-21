@@ -16,6 +16,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
     discordBot.on('ready', async () => {
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
       resolve(channel as TextChannel);
+      console.log("channel set")
     });
   })
 }
@@ -25,6 +26,7 @@ async function main() {
   console.log("Start setup")
   console.log(process.env.DISCORD_BOT_TOKEN)
   const channel = await discordSetup()
+     .then(msg => console.log("Destroyed"))
      .then(msg => discordBot.destroy())
      .then(msg => console.log("Destroyed"))
      .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
