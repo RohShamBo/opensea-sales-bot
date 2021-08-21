@@ -12,7 +12,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
       if (!process.env[envVar]) reject(`${envVar} not set`)
     })
   
-    discordBot.login(process.env.DISCORD_BOT_TOKEN);
+    
     discordBot.on('ready', async () => {
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
       resolve(channel as TextChannel);
@@ -23,6 +23,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
 
 async function main() {
   const channel = await discordSetup();
+  discordBot.login(process.env.DISCORD_BOT_TOKEN);
   channel.send('Resetting...')
      .then(msg => discordBot.destroy())
      .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
