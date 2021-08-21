@@ -6,6 +6,7 @@ import { parseISO } from 'date-fns'
 
 
 const discordBot = new Discord.Client();
+/*
 const  discordSetup = async (): Promise<TextChannel> => {
   return new Promise<TextChannel>((resolve, reject) => {
     ['DISCORD_BOT_TOKEN', 'DISCORD_CHANNEL_ID'].forEach((envVar) => {
@@ -20,16 +21,14 @@ const  discordSetup = async (): Promise<TextChannel> => {
     });
   })
 }
+*/
 
-
-async function main() {
+function main() {
   console.log("Start setup")
   console.log(process.env.DISCORD_BOT_TOKEN)
-  const channel = await discordSetup()
-     .then(msg => console.log("Destroyed"))
-     .then(msg => discordBot.destroy())
-     .then(msg => console.log("Destroyed"))
-     .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
+  discordBot.destroy()
+  console.log("Destroyed"))
+  discordBot.login(process.env.DISCORD_BOT_TOKEN));
 
   console.log("Restart complete")
 }
