@@ -1,17 +1,42 @@
 import 'dotenv/config';
 import Discord, { TextChannel } from 'discord.js';
+import fetch from 'node-fetch';
+import { ethers } from "ethers";
+import { parseISO } from 'date-fns'
+
 
 const discordBot = new Discord.Client();
-console.log("Enable restart")
-
-discordBot.on('ready', async () => {
+const  discordSetup = async (): Promise<TextChannel> => {
+  return new Promise<TextChannel>((resolve, reject) => {
+    ['DISCORD_BOT_TOKEN', 'DISCORD_CHANNEL_ID'].forEach((envVar) => {
+      if (!process.env[envVar]) reject(`${envVar} not set`)
+    })
+  
+    discordBot.login(process.env.DISCORD_BOT_TOKEN);
+    discordBot.on('ready', async () => {
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
       resolve(channel as TextChannel);
     });
+  })
+}
 
-channel.send('Resetting...')
-    .then(msg => discordBot.destroy())
-    .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
 
-console.log("Restart complete")
+async function main() {
+  const channel = await discordSetup();
+  channel.send('Resetting...')
+     .then(msg => discordBot.destroy())
+     .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
+
+  console.log("Restart complete")
+}
+
+main()
+  .then((res) =>{ 
+    console.warn(res)
+    process.exit(0)
+  })
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });
 
