@@ -25,8 +25,7 @@ async function main() {
   console.log("Start setup")
   const channel = await discordSetup();
   console.log("Setup Complete")
-  discordBot.destroy())
-     .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
+  discordBot.destroy().then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
 
   console.log("Restart complete")
 }
