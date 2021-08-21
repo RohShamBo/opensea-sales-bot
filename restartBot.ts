@@ -23,9 +23,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
 
 async function main() {
   console.log("Start setup")
-  const channel = await discordSetup();
-  
-  console.log("Setup Complete")
+  const channel = await discordSetup()
      .then(msg => discordBot.destroy())
      .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
 
