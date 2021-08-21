@@ -3,6 +3,10 @@ import Discord, { TextChannel } from 'discord.js';
 
 const discordBot = new Discord.Client();
 console.log("Enable restart")
-discordBot.destroy().then(discordBot.login(process.env.DISCORD_BOT_TOKEN!));
+
+discordBot.send('Resetting...')
+    .then(msg => discordBot.destroy())
+    .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
+
 console.log("Restart complete")
 
