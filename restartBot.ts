@@ -9,7 +9,7 @@ discordBot.on('ready', async () => {
       resolve(channel as TextChannel);
     });
 
-discordBot.send('Resetting...')
+channel.send('Resetting...')
     .then(msg => discordBot.destroy())
     .then(() => discordBot.login(process.env.DISCORD_BOT_TOKEN));
 
