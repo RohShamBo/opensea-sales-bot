@@ -57,6 +57,10 @@ async function main() {
   
   for(var i = 0; i < collection_slugs.length; i++)
   { 
+    await new Promise(resolve => {
+      setTimeout(resolve, 500)
+    })
+	  
     console.log(collection_slugs[i]); 
     console.log(collection_adds[i]); 
     if(collection_slugs[i] != '') {                    
