@@ -12,7 +12,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
       if (!process.env[envVar]) reject(`${envVar} not set`)
     })
   
-    //discordBot.login(process.env.DISCORD_BOT_TOKEN);
+    discordBot.login(process.env.DISCORD_BOT_TOKEN);
     discordBot.on('ready', async () => {
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
       resolve(channel as TextChannel);
