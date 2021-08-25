@@ -55,7 +55,9 @@ async function main() {
       collection_slug: process.env.COLLECTION_SLUG!,
       contract_address: process.env.CONTRACT_ADDRESS!
   })).then((resp) => resp.json());
-
+	
+  console.log(openSeaResponse)
+	
   await Promise.all(
     openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
       const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
