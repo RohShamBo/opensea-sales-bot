@@ -72,7 +72,7 @@ async function main() {
       		only_opensea: 'false',
       		occurred_after: hoursAgo.toString(), 
       		collection_slug: collection_slugs[i],
-      		contract_address: collection_adds[i]!
+      		asset_contract_address: collection_adds[i]!
   	})).then((resp) => resp.json());
 
   	await Promise.all(
