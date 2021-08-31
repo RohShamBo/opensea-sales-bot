@@ -68,7 +68,7 @@ async function main() {
 	      buyer_name = sale?.winner_account?.user?.username
       } else {
 	      buyer_name = sale?.winner_account?.address
-	      buyer_name.length = seller_name.length = 6
+	      buyer_name.length = 6
       }
 	    
       if (sale?.seller?.user?.username != null) {
