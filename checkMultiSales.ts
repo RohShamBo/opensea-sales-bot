@@ -74,10 +74,11 @@ async function main() {
       		collection_slug: collection_slugs[i],
       		asset_contract_address: collection_adds[i]!
   	})).then((resp) => resp.json());
-
+	
+	console.log(openSeaResponse)
   	await Promise.all(
     		openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
-		    console.log(sale)
+		    
       		    var buyer_name;
       		    var seller_name;
 	    
