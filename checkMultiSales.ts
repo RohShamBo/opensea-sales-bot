@@ -77,6 +77,7 @@ async function main() {
 
   	await Promise.all(
     		openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
+		    console.log(sale)
       		    var buyer_name;
       		    var seller_name;
 	    
@@ -93,8 +94,8 @@ async function main() {
 	                   seller_name = sale?.seller?.address
 	                   seller_name = seller_name.substr(0,8);
                     }
-      			const message = buildMessage(sale, buyer_name, seller_name, collection_slugs[i]);
-      			return channel.send(message)
+      		    const message = buildMessage(sale, buyer_name, seller_name, collection_slugs[i]);
+      		    return channel.send(message)
     		})
   	); 
     } else {
