@@ -62,7 +62,7 @@ async function main() {
     openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
       const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
       const seller_name
-      if sale?.seller?.user?.username != null {
+      if (sale?.seller?.user?.username != null) {
 	      seller_name = sale?.seller?.user?.username
       } else {
 	      seller_name = sale?.seller?.address
