@@ -32,8 +32,8 @@ const buildMessage = (sale: any, buyer_name, seller_name) => (
 		//{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`},
 		//{ name: 'Buyer', value: sale?.winner_account?.user?.username, },
 		//{ name: 'Seller', value: sale?.seller?.user?.username,  },
-		{ name: 'Buyer', value: buyer_name, },
-		{ name: 'Seller', value: seller_name,  },
+		{ name: 'Buyer', value: buyer_name, inline: true },
+		{ name: 'Seller', value: seller_name, inline: true  },
 	)
   	//.setImage(sale.asset.image_url)
 	.setTimestamp(Date.parse(`${sale?.created_date}Z`))
