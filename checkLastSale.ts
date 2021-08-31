@@ -67,15 +67,13 @@ async function main() {
       if (sale?.winner_account?.user?.username != null) {
 	      buyer_name = sale?.winner_account?.user?.username
       } else {
-	      buyer_name = sale?.winner_account?.address.substr(0,6));
-	      //buyer_name.substr(0[, 6]);
+	      buyer_name = sale?.winner_account?.address.substr(0,6);
       }
 	    
       if (sale?.seller?.user?.username != null) {
 	      seller_name = sale?.seller?.user?.username
       } else {
 	      seller_name = sale?.seller?.address.substr(0,6));
-	      //seller_name.substr(0[, 6]);
       }
 	    
       const message = buildMessage(sale, buyer_name, seller_name);
