@@ -61,7 +61,13 @@ async function main() {
   await Promise.all(
     openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
       const buyer_name = sale?.winner_account?.user?.username != null ? sale?.winner_account?.user?.username : sale?.winner_account?.address;
-      const seller_name = sale?.seller?.user?.username != null ? sale?.seller?.user?.username : (sale?.seller?.address, seller_name.length = 6);
+      const seller_name
+      if sale?.seller?.user?.username != null {
+	      seller_name = sale?.seller?.user?.username
+      } else {
+	      seller_name = sale?.seller?.address
+	      seller_name.length = 6
+      }
       const message = buildMessage(sale, buyer_name, seller_name);
       return channel.send(message)
     })
