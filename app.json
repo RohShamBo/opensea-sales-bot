@@ -43,6 +43,18 @@
     },
     "MULTI_COLLECTION_SLUG_3": {
       "description": "The OpenSea slug for your collection"
+    },
+  "MULTI_CONTRACT_ADDRESS_4": {
+      "description": "The address of your token contract"
+    },
+    "MULTI_COLLECTION_SLUG_4": {
+      "description": "The OpenSea slug for your collection"
+    },
+  "MULTI_CONTRACT_ADDRESS_5": {
+      "description": "The address of your token contract"
+    },
+    "MULTI_COLLECTION_SLUG_5": {
+      "description": "The OpenSea slug for your collection"
     }
   },
   "image": "heroku/nodejs",
