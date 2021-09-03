@@ -52,8 +52,8 @@ async function main() {
   console.log("Discord Setup Complete")
   const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
-  const collection_slugs = [process.env.MULTI_CONTRACT_SLUG_1!, process.env.MULTI_CONTRACT_SLUG_2!,process.env.MULTI_CONTRACT_SLUG_3!]
-  const collection_adds = [process.env.MULTI_CONTRACT_ADDRESS_1!, process.env.MULTI_CONTRACT_ADDRESS_2!,process.env.MULTI_CONTRACT_ADDRESS_3!]
+  const collection_slugs = [process.env.MULTI_CONTRACT_SLUG_1!, process.env.MULTI_CONTRACT_SLUG_2!,process.env.MULTI_CONTRACT_SLUG_3!,process.env.MULTI_CONTRACT_SLUG_4!,process.env.MULTI_CONTRACT_SLUG_5!]
+  const collection_adds = [process.env.MULTI_CONTRACT_ADDRESS_1!, process.env.MULTI_CONTRACT_ADDRESS_2!,process.env.MULTI_CONTRACT_ADDRESS_3!,process.env.MULTI_CONTRACT_ADDRESS_4!,process.env.MULTI_CONTRACT_ADDRESS_5!]
   
   for(var i = 0; i < collection_slugs.length; i++)
   { 
