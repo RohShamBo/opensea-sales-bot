@@ -22,7 +22,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
 
 const buildMessage = (sale: any, asset_name, buyer_name, seller_name, message_color) => (
   new Discord.MessageEmbed()
-	.setColor('#0099ff')
+	.setColor(message_color)
 	.setTitle(asset_name + ' sold for ' + `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`)
 	.setURL(sale.asset.permalink)
 	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://opensea.io/activity/' + process.env.COLLECTION_SLUG!)
@@ -78,7 +78,7 @@ async function main() {
       }
       
       const asset_name = sale.asset.name != null ? sale.asset.name : (sale.asset.collection.name + ' #' + sale.asset.token_id);
-      const message_color = sale.asset.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
+      const message_color = sale?.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
 	    
       const message = buildMessage(sale, asset_name, buyer_name, seller_name, message_color);
       return channel.send(message)
