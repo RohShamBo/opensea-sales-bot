@@ -68,6 +68,10 @@
       "description": "The OpenSea slug for your collection",
       "required": false
     }
+    "API_KEY": {
+      "description": "OpenSea API Key",
+      "required": false
+    }
   },
   "image": "heroku/nodejs",
   "addons": ["scheduler"],
