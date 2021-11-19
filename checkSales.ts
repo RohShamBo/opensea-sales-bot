@@ -46,7 +46,7 @@ async function main() {
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
   const options = {
  	method: 'GET',
- 	headers: {Accept: 'application/json', 'X-API-KEY': '1f13a1d45eb24f7bbaad99d6040bcdaf'}
+ 	headers: {Accept: 'application/json', 'X-API-KEY': process.env.API_KEY!}
   };
   const openSeaResponse = await fetch(
     "https://api.opensea.io/api/v1/events?" + new URLSearchParams({
