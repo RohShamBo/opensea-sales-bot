@@ -54,7 +54,11 @@ async function main() {
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
   const collection_slugs = [process.env.MULTI_CONTRACT_SLUG_1!, process.env.MULTI_CONTRACT_SLUG_2!,process.env.MULTI_CONTRACT_SLUG_3!,process.env.MULTI_CONTRACT_SLUG_4!,process.env.MULTI_CONTRACT_SLUG_5!]
   const collection_adds = [process.env.MULTI_CONTRACT_ADDRESS_1!, process.env.MULTI_CONTRACT_ADDRESS_2!,process.env.MULTI_CONTRACT_ADDRESS_3!,process.env.MULTI_CONTRACT_ADDRESS_4!,process.env.MULTI_CONTRACT_ADDRESS_5!]
-  
+  const options = {
+ 	method: 'GET',
+ 	headers: {Accept: 'application/json', 'X-API-KEY': process.env.API_KEY!}
+  };
+	
   for(var i = 0; i < collection_slugs.length; i++)
   { 
     await new Promise(resolve => {
@@ -73,7 +77,7 @@ async function main() {
       		occurred_after: hoursAgo.toString(), 
       		collection_slug: collection_slugs[i],
       		asset_contract_address: collection_adds[i]!
-  	})).then((resp) => resp.json());
+  	}),options).then((resp) => resp.json());
 	
 	//console.log(openSeaResponse)
   	await Promise.all(
