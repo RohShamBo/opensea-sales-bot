@@ -44,7 +44,10 @@ async function main() {
   const channel = await discordSetup();
   const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
-  
+  const options = {
+ 	method: 'GET',
+ 	headers: {Accept: 'application/json', 'X-API-KEY': '1f13a1d45eb24f7bbaad99d6040bcdaf'}
+  };
   const openSeaResponse = await fetch(
     "https://api.opensea.io/api/v1/events?" + new URLSearchParams({
       offset: '0',
@@ -54,7 +57,7 @@ async function main() {
       occurred_after: hoursAgo.toString(), 
       collection_slug: process.env.COLLECTION_SLUG!,
       asset_contract_address: process.env.CONTRACT_ADDRESS!
-  })).then((resp) => resp.json());
+  }),options).then((resp) => resp.json());
 	
   //console.log(openSeaResponse)
 	
