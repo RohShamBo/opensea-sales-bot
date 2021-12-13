@@ -38,6 +38,7 @@ async function main() {
   const channel = await discordSetup();
   const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
   const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
+  Array.range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
   const options = {
  	  method: 'GET',
  	  headers: {Accept: 'application/json', 'X-API-KEY': process.env.API_KEY!}
@@ -45,11 +46,11 @@ async function main() {
   console.log("Checking Bids")  
 	const openSeaListings = await fetch(
 	  "https://api.opensea.io/wyvern/v1/orders?" + new URLSearchParams({
-       asset_contract_address: process.env.CONTRACT_ADDRESS!
-	     offset: '0',
-	     limit: '30',
-       token_ids: range(3000, 4000),
-	     listed_after: hoursAgo.toString(), 
+       asset_contract_address: process.env.CONTRACT_ADDRESS!,
+       offset: '0',
+       limit: '30',
+       token_ids: Array.range(3000, 4000),
+       listed_after: hoursAgo.toString(), 
        bundled: 'false',
        include_invalid: 'false',
        include_bundled: 'false',
