@@ -20,17 +20,17 @@ const  discordSetup = async (): Promise<TextChannel> => {
   })
 }
 
-const buildMessage = (sale: any, asset_name, seller_name, message_color) => (
+const buildMessage = (listing: any, asset_name, seller_name, message_color) => (
   new Discord.MessageEmbed()
 	.setColor(message_color)
-	.setTitle(asset_name + ' sold for ' + `${ethers.utils.formatEther(sale.total_price)}${ethers.constants.EtherSymbol}`)
-	.setURL(sale.asset.permalink)
-	.setAuthor('OpenSea Bot', sale.asset.collection.image_url, 'https://opensea.io/activity/' + process.env.COLLECTION_SLUG!)
-	.setThumbnail(sale.asset.image_url)
+	.setTitle(asset_name + ' listed for ' + `${ethers.utils.formatEther(listing.starting_price)}${listing.constants.EtherSymbol}`)
+	.setURL(listing.asset.permalink)
+	.setAuthor('OpenSea Bot', listing.asset.collection.image_url, 'https://opensea.io/activity/' + process.env.COLLECTION_SLUG!)
+	.setThumbnail(listing.asset.image_url)
 	.addFields(
 		{ name: 'Seller', value: seller_name, inline: true  },
 	)
-	.setTimestamp(Date.parse(`${sale?.created_date}Z`))
+	.setTimestamp(Date.parse(`${listing?.created_date}Z`))
 	.setFooter('Sold on OpenSea', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png')
 )
 
