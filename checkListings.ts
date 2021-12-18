@@ -23,7 +23,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
 const buildMessage = (listing: any, asset_name, seller_name, message_color) => (
   new Discord.MessageEmbed()
 	.setColor(message_color)
-	.setTitle(asset_name + ' listed for ' + `${ethers.utils.formatEther(listing.starting_price)}${listing.constants.EtherSymbol}`)
+	.setTitle(asset_name + ' listed for ' + `${ethers.utils.formatEther(listing.starting_price)}${ethers.constants.EtherSymbol}`)
 	.setURL(listing.asset.permalink)
 	.setAuthor('OpenSea Bot', listing.asset.collection.image_url, 'https://opensea.io/activity/' + process.env.COLLECTION_SLUG!)
 	.setThumbnail(listing.asset.image_url)
