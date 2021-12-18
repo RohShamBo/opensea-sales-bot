@@ -43,36 +43,33 @@ async function main() {
  	  method: 'GET',
  	  headers: {Accept: 'application/json', 'X-API-KEY': process.env.API_KEY!}
   };
-  console.log("Checking Bids")  
-	const openSeaListings = await fetch(
-	  "https://api.opensea.io/wyvern/v1/orders?" + new URLSearchParams({
-       asset_contract_address: process.env.CONTRACT_ADDRESS!,
-       offset: '0',
-       limit: '30',
-       token_ids: range(3000, 4000),
-       listed_after: hoursAgo.toString(), 
-       bundled: 'false',
-       include_invalid: 'false',
-       include_bundled: 'false',
-       side: '1',
-       sale_kind: '0'
-	}),options).then((resp) => resp.json());
+  console.log("Checking Listings")  
+const openSeaResponse = await fetch(
+    "https://api.opensea.io/api/v1/events?" + new URLSearchParams({
+      offset: '0',
+      limit: '100',
+      event_type: 'created',
+      only_opensea: 'false',
+      occurred_after: hoursAgo.toString(), 
+      collection_slug: process.env.COLLECTION_SLUG!,
+      asset_contract_address: process.env.CONTRACT_ADDRESS!
+  }),options).then((resp) => resp.json());
 		
-  await Promise.all(
-    openSeaListings?.orders?.reverse().map(async (listing: any) => {
+    await Promise.all(
+    openSeaResponse?.asset_events?.reverse().map(async (listing: any) => {
       var seller_name;
-	   	    
-      if (listing?.maker?.user?.username != null) {
-	      seller_name = listing?.maker?.user?.username
+	    
+      if (listing?.seller?.user?.username != null) {
+	      seller_name = listing?.seller?.user?.username
       } else {
-	      seller_name = listing?.maker?.address
+	      seller_name = listing?.seller?.address
 	      seller_name = seller_name.substr(0,8);
       }
       
       const asset_name = listing.asset.name != null ? listing.asset.name : (listing.asset.collection.name + ' #' + listing.asset.token_id);
       const message_color = listing?.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
 	    
-      const message = buildMessage(sale, asset_name, seller_name, message_color);
+      const message = buildMessage(listing, asset_name, seller_name, message_color);
       return channel.send(message)
     })
   );   
