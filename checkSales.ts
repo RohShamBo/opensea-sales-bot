@@ -19,8 +19,8 @@ const  discordSetup = async (): Promise<TextChannel> => {
     });
     discordBot.on("error", (err) => {
     	console.log(`Discord client error '${err.code}' (${err.message}). Attempting to reconnect in 6s...`);
-	client.destroy();
-    	setTimeout(() => { client.login(config.token); }, 6000);
+	discordBot.destroy();
+    	setTimeout(() => { discordBot.login(process.env.DISCORD_BOT_TOKEN)); }, 6000);
      });
   })
 }
