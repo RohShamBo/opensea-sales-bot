@@ -17,6 +17,11 @@ const  discordSetup = async (): Promise<TextChannel> => {
       const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
       resolve(channel as TextChannel);
     });
+    discordBot.on("error", (err) => {
+    	console.log(`Discord client error '${err.code}' (${err.message}). Attempting to reconnect in 6s...`);
+	client.destroy();
+    	setTimeout(() => { client.login(config.token); }, 6000);
+     });
   })
 }
 
