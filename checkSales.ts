@@ -14,8 +14,9 @@ const  discordSetup = async (): Promise<TextChannel> => {
   
     discordBot.login(process.env.DISCORD_BOT_TOKEN);
     discordBot.on('ready', async () => {
-      const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
-      resolve(channel as TextChannel);
+      console.log(`Logged in as ${client.user.tag}!`);
+	const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
+        resolve(channel as TextChannel);
     });
     discordBot.on("error", (error) => {
     	console.log(error)
@@ -66,7 +67,7 @@ async function main() {
       asset_contract_address: process.env.CONTRACT_ADDRESS!
   }),options).then((resp) => resp.json());
 	
-  //console.log(openSeaResponse)
+  console.log(openSeaResponse)
 	
   await Promise.all(
     openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
