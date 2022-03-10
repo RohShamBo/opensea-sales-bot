@@ -14,7 +14,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
   
     discordBot.login(process.env.DISCORD_BOT_TOKEN);
     discordBot.on('ready', async () => {
-      console.log(`Logged in as ${client.user.tag}!`);
+      console.log(`Logged in as ${discordBot.user.tag}!`);
 	const channel = await discordBot.channels.fetch(process.env.DISCORD_CHANNEL_ID!);
         resolve(channel as TextChannel);
     });
