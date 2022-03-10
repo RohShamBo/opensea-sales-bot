@@ -21,7 +21,7 @@ const  discordSetup = async (): Promise<TextChannel> => {
     	console.log(error)
 	throw new Error('Discord login error');
     });
-    discordBot.on('debug', (e) = {
+    discordBot.on('debug', (e) => {
     	console.info(e);
     });
   })
