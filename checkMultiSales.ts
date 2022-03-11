@@ -70,11 +70,8 @@ async function main() {
     if(collection_slugs[i] != '') {                    
   	const openSeaResponse = await fetch(
     		"https://api.opensea.io/api/v1/events?" + new URLSearchParams({
-     		 offset: '0',
-      		limit: '100',
       		event_type: 'successful',
       		only_opensea: 'false',
-      		occurred_after: hoursAgo.toString(), 
       		collection_slug: collection_slugs[i],
       		asset_contract_address: collection_adds[i]!
   	}),options).then((resp) => resp.json());
@@ -82,7 +79,8 @@ async function main() {
 	//console.log(openSeaResponse)
   	await Promise.all(
     		openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
-		    
+		  var timestamp = Math.round(new Date(sale?.transaction.timestamp).getTime() / 1000)
+	          if (timestamp > hoursAgo) {
       		    var buyer_name;
       		    var seller_name;
 	    
@@ -101,10 +99,11 @@ async function main() {
                     }
 			
 		    const asset_name = sale.asset.name != null ? sale.asset.name : (sale.asset.collection.name + ' #' + sale.asset.token_id);
- 		    const message_color = sale?.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
+ 		    const message_color = sale?.payment_token.symbol == 'ETH' ? '#0099ff' : '#BA55D3';
 			
       		    const message = buildMessage(sale, asset_name,buyer_name, seller_name, collection_slugs[i], message_color);
       		    return channel.send(message)
+		  }
     		})
   	); 
     } else {
