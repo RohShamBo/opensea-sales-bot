@@ -60,14 +60,13 @@ async function main() {
     "https://api.opensea.io/api/v1/events?" + new URLSearchParams({
       event_type: 'successful',
       only_opensea: 'false',
-      occurred_after: hoursAgo.toString(), 
       collection_slug: process.env.COLLECTION_SLUG!,
       asset_contract_address: process.env.CONTRACT_ADDRESS!
   }),options).then((resp) => resp.json());
 		
   await Promise.all(
-    openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
-      var timestamp = Math.round(new Date(sale?.transaction?.timestamp) / 1000)
+    openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {  
+      	var timestamp = Math.round(new Date(sale?.transaction?.timestamp) / 1000)
 	  if (timestamp > hoursAgo) {
 	      var buyer_name;
 	      var seller_name;
