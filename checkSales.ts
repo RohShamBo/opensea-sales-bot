@@ -87,7 +87,7 @@ async function main() {
 	      }
 
 	      const asset_name = sale.asset.name != null ? sale.asset.name : (sale.asset.collection.name + ' #' + sale.asset.token_id);
-	      const message_color = sale?.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
+	      const message_color = sale?.payment_token.symbol == 'ETH' ? '#0099ff' : '#BA55D3';
 
 	      const message = buildMessage(sale, asset_name, buyer_name, seller_name, message_color);
 	      return channel.send(message)
