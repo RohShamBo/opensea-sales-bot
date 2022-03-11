@@ -67,28 +67,31 @@ async function main() {
 		
   await Promise.all(
     openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
-      var buyer_name;
-      var seller_name;
-	    
-      if (sale?.winner_account?.user?.username != null) {
-	      buyer_name = sale?.winner_account?.user?.username
-      } else {
-	      buyer_name = sale?.winner_account?.address
-	      buyer_name = buyer_name.substr(0,8);
-      }
-	    
-      if (sale?.seller?.user?.username != null) {
-	      seller_name = sale?.seller?.user?.username
-      } else {
-	      seller_name = sale?.seller?.address
-	      seller_name = seller_name.substr(0,8);
-      }
-      
-      const asset_name = sale.asset.name != null ? sale.asset.name : (sale.asset.collection.name + ' #' + sale.asset.token_id);
-      const message_color = sale?.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
-	    
-      const message = buildMessage(sale, asset_name, buyer_name, seller_name, message_color);
-      return channel.send(message)
+      var timestamp = Math.round(new Date(sale.transaction.timestamp) / 1000)
+	  if (timestamp > hoursAgo) {
+	      var buyer_name;
+	      var seller_name;
+
+	      if (sale?.winner_account?.user?.username != null) {
+		      buyer_name = sale?.winner_account?.user?.username
+	      } else {
+		      buyer_name = sale?.winner_account?.address
+		      buyer_name = buyer_name.substr(0,8);
+	      }
+
+	      if (sale?.seller?.user?.username != null) {
+		      seller_name = sale?.seller?.user?.username
+	      } else {
+		      seller_name = sale?.seller?.address
+		      seller_name = seller_name.substr(0,8);
+	      }
+
+	      const asset_name = sale.asset.name != null ? sale.asset.name : (sale.asset.collection.name + ' #' + sale.asset.token_id);
+	      const message_color = sale?.payment_token.id == '1' ? '#0099ff' : '#BA55D3';
+
+	      const message = buildMessage(sale, asset_name, buyer_name, seller_name, message_color);
+	      return channel.send(message)
+	  }
     })
   );   
 }
