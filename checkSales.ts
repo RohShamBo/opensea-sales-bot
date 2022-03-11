@@ -65,8 +65,9 @@ async function main() {
   }),options).then((resp) => resp.json());
 		
   await Promise.all(
-    openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {  
-      	var timestamp = Math.round(new Date(sale?.transaction?.timestamp) / 1000)
+    openSeaResponse?.asset_events?.reverse().map(async (sale: any) => { 
+	console.log(sale?.transaction.timestamp)
+      	var timestamp = Math.round(new Date(sale?.transaction.timestamp) / 1000)
 	  if (timestamp > hoursAgo) {
 	      var buyer_name;
 	      var seller_name;
